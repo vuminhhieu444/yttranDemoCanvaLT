@@ -1,0 +1,52 @@
+﻿@model Yttran.Models.News
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>News</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="News.Id" />
+            <div class="form-group">
+                <label asp-for="News.Title" class="control-label">Title</label>
+                <input asp-for="News.Title" name="Title" class="form-control" />
+                <span asp-validation-for="News.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="News.AllContent" class="control-label">AllContent</label>
+                @*<input asp-for="News.AllContent" name="AllContent" class="form-control" />*@
+                <textarea asp-for="News.AllContent" name="AllContent" rows="5" cols="80"></textarea>
+                <script>
+                    CKEDITOR.replace('AllContent');
+                </script>
+                <span asp-validation-for="News.AllContent" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="News.CreateDate" class="control-label"></label>
+                <input asp-for="News.CreateDate" class="form-control" />
+                <span asp-validation-for="News.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="News.UpdateDate" class="control-label"></label>
+                <input asp-for="News.UpdateDate" class="form-control" />
+                <span asp-validation-for="News.UpdateDate" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/Admin/News/Index">Back to List</a>
+</div>
+

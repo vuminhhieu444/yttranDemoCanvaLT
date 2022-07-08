@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Yttran.Models.ServiceDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Service Details</h1>
+
+<p>
+    <a href="/Admin/ServiceDetails/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Detail)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Menu)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.MenuId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Detail)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Menu.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuId)
+            </td>
+            <td>
+                <a href="/Admin/ServiceDetails/Edit/@item.Id">Edit</a> |
+                <a href="/Admin/ServiceDetails/Details/@item.Id">Details</a> |
+                <a href="/Admin/ServiceDetails/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

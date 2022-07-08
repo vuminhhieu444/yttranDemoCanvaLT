@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Yttran.Models.SlideLogo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Slides And Logoes</h1>
+
+<p>
+    <a href="/Admin/SlideLogoes/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SlidePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LogoPath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlidePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LogoPath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                <a href="/Admin/SlideLogoes/Edit/@item.Id">Edit</a> |
+                <a href="/Admin/SlideLogoes/Details/@item.Id">Details</a> |
+                <a href="/Admin/SlideLogoes/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Yttran.Models.SubMenu>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{ 
+    <link rel="stylesheet" href="" />
+}
+<h1>SubMenus</h1>
+
+<p>
+    <a href="/Admin/SubMenus/Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Menu)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Menu.Id)
+            </td>
+            <td>
+                <a href="/Admin/SubMenus/Edit/@item.Id">Edit</a> |
+                <a href="/Admin/SubMenus/Details/@item.Id">Details</a> |
+                <a href="/Admin/SubMenus/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

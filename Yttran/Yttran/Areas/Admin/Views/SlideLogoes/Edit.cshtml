@@ -1,0 +1,48 @@
+﻿@model Yttran.Models.SlideLogo
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>SlideLogo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SlideLogo.Id" />
+            <div class="form-group">
+                <label asp-for="SlideLogo.SlidePath" class="control-label">Slide</label>
+                <input asp-for="SlideLogo.SlidePath" name="SlidePath" class="form-control" />
+                <span asp-validation-for="SlideLogo.SlidePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlideLogo.LogoPath" class="control-label">Logo</label>
+                <input asp-for="SlideLogo.LogoPath" name="LogoPath" class="form-control" />
+                <span asp-validation-for="SlideLogo.LogoPath" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="UpdateDate" class="control-label"></label>
+                <input asp-for="UpdateDate" class="form-control" />
+                <span asp-validation-for="UpdateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/Admin/SlideLogoes/Index">Back to List</a>
+</div>
+

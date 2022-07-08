@@ -1,0 +1,91 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Yttran.Models;
+
+namespace Yttran
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<YttranContext, YttranContext>();
+            services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddControllersWithViews()
+            .AddRazorOptions(options =>
+            {
+                options.ViewLocationFormats.Add("/{0}.cshtml");
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "Menus",
+                    pattern: "{area:exists}/{controller=Menus}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "News",
+                    pattern: "{area:exists}/{controller=News}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "Accounts",
+                    pattern: "{area:exists}/{controller=Accounts}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "SlideLogoes",
+                    pattern: "{area:exists}/{controller=SlideLogoes}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "SubMenu",
+                    pattern: "{area:exists}/{controller=SubMenus}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "Login",
+                    pattern: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+            });
+
+        }
+    }
+}
